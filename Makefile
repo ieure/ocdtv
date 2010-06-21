@@ -3,6 +3,7 @@ prereqs:
 
 dev:
 	virtualenv-2.6 --no-site-packages .
+	virtualenv-2.6 --relocatable .
 	bin/python setup.py develop
 
 test:
