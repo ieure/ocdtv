@@ -1,0 +1,31 @@
+* What is OCDTV?
+
+  Imagine that you’ve downloaded a number of episodes of your favorite
+  TV show. You’d like to watch these shows on your iDevice, but you
+  can’t because they’re in the wrong format: XviD/AVI or
+  x264/MKV. Perhaps you’d also like to use iTunes’ newest/oldest
+  unwatched options when you sync these episodes to your device, so
+  you have episodes you haven’t seen yet. You can’t, since this
+  requires metadata: the show name, season and episode number.
+
+  OCDTV fixes all this. One command will locate video files, determine
+  their metadata, transcode them (if necessary), and import them into
+  iTunes for your viewing pleasure.
+
+
+* Installing OCDTV
+
+  $ sudo setup.py install
+
+  Or, if you’re as OCD about your workstation as your metadata:
+
+  $ virtualenv --no-site-packages .
+  $ python setup.py develop
+
+* Using OCDTV
+
+  $ ocdtv ~/Downloads/TV
+
+  If no path is given, it defaults to the directory you’re running
+  OCDTV from.
+
