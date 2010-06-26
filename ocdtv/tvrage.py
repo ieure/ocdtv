@@ -16,6 +16,8 @@ from pprint import pprint
 from httplib2 import Http
 from appscript import k
 
+import ocdtv.common as common
+
 _BASE = "http://services.tvrage.com"
 _YEAR_RE = re.compile('([0-9]{4})')
 
