@@ -6,6 +6,7 @@
 
 """Talk to iTunes."""
 
+import logging
 from itertools import imap
 
 from appscript import app
