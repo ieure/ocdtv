@@ -25,10 +25,10 @@ def main():
     (opts, args) = parser.parse_args()
 
     if len(args) >= 1:
-        directories = args[1:]
+        directories = args
     else:
         directories = (".",)
 
     for directory in directories:
-        for (episode, filename) in scan(directory):
-            itunes.add(filename, metadata[episode])
+        for (filename, metadata) in scan(directory):
+            itunes.add(filename, metadata)

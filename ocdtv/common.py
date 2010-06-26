@@ -46,5 +46,5 @@ def season_episode(filename):
     for regexp in EPISODE_REGEXPS:
         data = regexp.search(filename)
         if data:
-            return dict(
-                (key, int(val)) for (key, val) in data.groupdict().iteritems())
+            groups = data.groupdict()
+            return (int(groups['season']), int(groups['episode']))

@@ -50,7 +50,7 @@ def test_show_name():
 
 def check_season_episode(filename, season, episode):
     season_ep = common.season_episode(filename)
-    assert season_ep == dict(season=season, episode=episode), \
+    assert season_ep == (season, episode), \
             "Got wrong info %r for %s, expected %dx%d" % (season_ep, filename,
                                                           season, episode)
 

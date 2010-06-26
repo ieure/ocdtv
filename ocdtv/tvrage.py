@@ -4,6 +4,7 @@
 # Author: Ian Eure <ian.eure@gmail.com>
 #
 
+import os
 import re
 import logging
 from itertools import imap
@@ -21,10 +22,12 @@ import ocdtv.common as common
 _BASE = "http://services.tvrage.com"
 _YEAR_RE = re.compile('([0-9]{4})')
 
-
 __INFO_CACHE = {}
 __EPISODE_CACHE = {}
 __METADATA_CACHE = {}
+
+
+HTTP = Http("%s/.ocdtv" % os.getenv('HOME'))
 
 def _parse_info(info_body):
     """Return a parsed show info body."""
@@ -62,7 +65,7 @@ def episodes(show_or_show_id):
 
     if id_ not in __EPISODE_CACHE:
         url = "%s/feeds/episode_list.php?sid=%d" % (_BASE, id_)
-        (status, content) = Http().request(url)
+        (status, content) = HTTP.request(url)
         __EPISODE_CACHE[id_]  = dict(_extract_episodes(
                 ElementTree.fromstring(content)))
 
@@ -74,7 +77,7 @@ def show_info(name):
         url = "%s/tools/quickinfo.php?%s" % (_BASE, urlencode({'show': name}))
         logging.info('Fetching info for "%s"', name)
         logging.debug("Fetching URL %s", url)
-        (status, content) = Http().request(url)
+        (status, content) = HTTP.request(url)
         __INFO_CACHE[name] = _parse_info(content)
 
     return __INFO_CACHE[name]
@@ -113,5 +116,7 @@ def metadata(show_name):
 
     return __METADATA_CACHE['show_name']
 
+
 def file_metadata(filename):
-    return metadata(common.show_name(filename))
+    return metadata(show_info(common.show_name(
+                filename))['Show Name'])[common.season_episode(filename)]
