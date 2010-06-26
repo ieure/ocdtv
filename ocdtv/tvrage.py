@@ -22,7 +22,9 @@ _BASE = "http://services.tvrage.com"
 _YEAR_RE = re.compile('([0-9]{4})')
 
 
-
+__INFO_CACHE = {}
+__EPISODE_CACHE = {}
+__METADATA_CACHE = {}
 
 def _parse_info(info_body):
     """Return a parsed show info body."""
@@ -57,17 +59,25 @@ def episodes(show_or_show_id):
         id_ = show_id(show_or_show_id)
     else:
         id_ = show_or_show_id
-    url = "%s/feeds/episode_list.php?sid=%d" % (_BASE, id_)
-    (status, content) = Http().request(url)
-    return dict(_extract_episodes(ElementTree.fromstring(content)))
+
+    if id_ not in __EPISODE_CACHE:
+        url = "%s/feeds/episode_list.php?sid=%d" % (_BASE, id_)
+        (status, content) = Http().request(url)
+        __EPISODE_CACHE[id_]  = dict(_extract_episodes(
+                ElementTree.fromstring(content)))
+
+    return __EPISODE_CACHE[id_]
 
 
 def show_info(name):
-    url = "%s/tools/quickinfo.php?%s" % (_BASE, urlencode({'show': name}))
-    logging.info('Fetching info for "%s"', name)
-    logging.debug("Fetching URL %s", url)
-    (status, content) = Http().request(url)
-    return _parse_info(content)
+    if name not in __INFO_CACHE:
+        url = "%s/tools/quickinfo.php?%s" % (_BASE, urlencode({'show': name}))
+        logging.info('Fetching info for "%s"', name)
+        logging.debug("Fetching URL %s", url)
+        (status, content) = Http().request(url)
+        __INFO_CACHE[name] = _parse_info(content)
+
+    return __INFO_CACHE[name]
 
 
 def _metadata_internal(info, eps):
@@ -96,6 +106,12 @@ def _metadata_internal(info, eps):
 
 def metadata(show_name):
     """Return metadata for all episodes of a show."""
+    if not show_name in __METADATA_CACHE:
+        info = show_info(show_name)
+        __METADATA_CACHE['show_name'] = _metadata_internal(
+            info, episodes(int(info['Show ID'])))
 
-    return _metadata_internal(show_info(show_name),
-                              episodes(int(info['Show ID'])))
+    return __METADATA_CACHE['show_name']
+
+def file_metadata(filename):
+    return metadata(common.show_name(filename))

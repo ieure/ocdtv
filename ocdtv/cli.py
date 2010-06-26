@@ -15,7 +15,7 @@ import ocdtv.tvrage as rage
 import ocdtv.itunes as itunes
 
 def get_parser():
-    parser = OptionParser(usage="""usage: %prog SHOW_NAME [DIRECTORY]""")
+    parser = OptionParser(usage="""usage: %prog [DIRECTORY] ...""")
     return parser
 
 
@@ -24,17 +24,11 @@ def main():
     parser = get_parser()
     (opts, args) = parser.parse_args()
 
-    if len(args) < 1 or len(args) > 2:
-        parser.print_help()
-        sys.exit(1)
-
-    if len(args) == 2:
-        directory = args[1]
+    if len(args) >= 1:
+        directories = args[1:]
     else:
-        directory = "."
+        directories = (".",)
 
-    # Get show info
-    metadata = rage.metadata(args[0])
-
-    for (episode, filename) in scan(directory):
-        itunes.add(filename, metadata[episode])
+    for directory in directories:
+        for (episode, filename) in scan(directory):
+            itunes.add(filename, metadata[episode])
