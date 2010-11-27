@@ -12,8 +12,10 @@ from itertools import imap, chain
 from optparse import OptionParser
 
 from ocdtv.filescanner import scan
+from ocdtv.transcoder import transcoded
 import ocdtv.tvrage as rage
 import ocdtv.itunes as itunes
+
 
 def get_parser():
     parser = OptionParser(usage="""usage: %prog [DIRECTORY] ...""")
@@ -32,7 +34,7 @@ def get_parser():
 
 
 def main():
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
     parser = get_parser()
     (opts, args) = parser.parse_args()
 
@@ -41,7 +43,9 @@ def main():
     else:
         directories = (".",)
 
-    for (filename, metadata) in chain.from_iterable(imap(scan, directories)):
+    for (filename, metadata) in transcoded(
+        opts.handbrake, opts.preset, opts.no_act,
+        chain.from_iterable(imap(scan, directories))):
         if opts.no_act:
             print "Adding %s to iTunes" % filename
             continue
