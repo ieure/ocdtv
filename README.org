@@ -12,6 +12,13 @@
   their metadata, transcode them (if necessary), and import them into
   iTunes for your viewing pleasure.
 
+* Why?
+
+  I’m crazy about metadata. I like my stuff to be organized,
+  particularly when it’s digital. I could have sucked it up and fixed
+  up metadata by hand for the nth time, or I could have spent even
+  more time making sure I never had to do that again. I chose the latter.
+
 
 * Installing OCDTV
 
@@ -28,6 +35,15 @@
 
   If no path is given, it defaults to the directory you’re running
   OCDTV from.
+
+* Transcoding
+
+  To transcode, you need a copy of the [[http://handbrake.fr/downloads2.php][HandBrake CLI]]. You can put it
+  anywhere you want, but OCDTV looks in =/Applications= by default.
+
+  OCDTV only transcodes to a HandBrake preset, so make sure you have a
+  suitable one configured. The AppleTV preset is a good choice which
+  works on most modern Apple devices (iPhone, iPad, Apple TV, etc).
 
 
 * Limitations & known issues
@@ -51,3 +67,25 @@
 
    It would be awesome if OCDTV also coped with films, but it
    currently doesn’t.
+
+** Does not detect dupes in iTunes
+
+   If the show is already in iTunes, OCDTV does not yet notice that
+   and skip adding it.
+
+** Copes poorly with different defaults
+
+   If you invoke OCDTV thusly:
+
+#+BEGIN_SRC shell
+$ ocdtv -p AppleTV ~/Downloads/stuff
+#+END_SRC
+
+   Then again with: 
+
+#+BEGIN_SRC shell
+$ ocdtv -p iPad ~/Downloads/stuff
+#+END_SRC
+
+   OCDTV will add the AppleTV transcoded files again, rather then
+   transcoding with the new preset and adding those.
