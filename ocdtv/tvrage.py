@@ -14,7 +14,6 @@ from operator import itemgetter
 from collections import defaultdict
 from urllib import urlencode
 from xml.etree import ElementTree
-from pprint import pprint
 
 from httplib2 import Http
 from appscript import k
@@ -38,7 +37,6 @@ def _parse_info(info_body):
     try:
         return dict(line.split("@", 1) for line in info_body.splitlines())
     except ValueError:
-        print info_body
         raise
 
 

@@ -71,7 +71,6 @@ def transcoded(handbrake, preset, no_act, file_info):
             continue
 
         if not is_importable(filename):
-            print "NEED to transcode %s" % filename
             filename = transcode(filename)
 
         good_files.append(base)
