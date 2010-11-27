@@ -32,7 +32,7 @@ def scan(directory="."):
     logging.debug("Walking %s", directory)
     for (path, names, filenames) in os.walk(directory):
         logging.debug("%r", filenames)
-        for video in ifilter(is_importable, filenames):
+        for video in filenames:
             logging.debug("Found video %s", video)
             info = rage.file_metadata(video)
             if not info:
@@ -43,6 +43,6 @@ def scan(directory="."):
             logging.debug(
                 "Found %dx%d in %s",
                 int(info['season_number']), int(info['episode_number']), video)
-            yield (info, "%s/%s" % (path, video))
+            yield ("%s/%s" % (path, video), info)
 
     raise StopIteration()
