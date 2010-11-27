@@ -15,4 +15,5 @@ setup(name="ocdtv",
                     ['ocdtv = ocdtv.cli:main']},
       install_requires=['appscript',
                         'httplib2'],
-      tests_require=['nose'])
+      tests_require=['nose'],
+      test_suite="nose.collector")
