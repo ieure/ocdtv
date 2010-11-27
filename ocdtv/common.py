@@ -8,6 +8,7 @@
 
 import re
 from itertools import ifilter
+from difflib import get_close_matches
 
 JUNK_REGEXP = re.compile(r"[ \._\-]+")
 
@@ -24,8 +25,21 @@ RAW_REGEXPS = (
 
 EPISODE_REGEXPS = tuple(re.compile(exp, re.I) for exp in RAW_REGEXPS)
 
+
+class NoShowError(Exception):
+
+    """Raised when we can't determine what show a filename represents."""
+
+    pass
+
+
 def capitalize(word):
     return word == word.upper() and word or word.title()
+
+
+def similar(detected, returned):
+    """Return True if returned name is close enough to detected."""
+    return bool(get_close_matches(detected, (returned,)))
 
 
 def show_name(filename):

@@ -78,7 +78,14 @@ def show_info(name):
         logging.info('Fetching info for "%s"', name)
         logging.debug("Fetching URL %s", url)
         (status, content) = HTTP.request(url)
-        __INFO_CACHE[name] = _parse_info(content)
+        info = _parse_info(content)
+        if not common.similar(name, info.get('Show Name', "")):
+            raise common.NoShowError(
+                "Extracted show name `%s' doesn't appear to match TVRage's "
+                "show name `%s'" %
+                (name, info['Show Name']))
+
+        __INFO_CACHE[name] = info
 
     return __INFO_CACHE[name]
 
@@ -111,6 +118,7 @@ def metadata(show_name):
     """Return metadata for all episodes of a show."""
     if not show_name in __METADATA_CACHE:
         info = show_info(show_name)
+
         __METADATA_CACHE['show_name'] = _metadata_internal(
             info, episodes(int(info['Show ID'])))
 
@@ -118,5 +126,9 @@ def metadata(show_name):
 
 
 def file_metadata(filename):
-    return metadata(show_info(common.show_name(
-                filename))['Show Name'])[common.season_episode(filename)]
+    try:
+        return metadata(show_info(common.show_name(
+                    filename))['Show Name'])[common.season_episode(filename)]
+    except common.NoShowError, ex:
+        logging.debug(ex)
+        return None

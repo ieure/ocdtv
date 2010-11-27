@@ -66,3 +66,11 @@ def test_capitalize():
     assert common.capitalize("UK") == "UK"
     assert common.capitalize("the") == "The"
     assert common.capitalize("grAND") == "Grand"
+
+
+def test_similar():
+    assert common.similar("Wire", "The Wire")
+    assert common.similar("The Wire", "The Wire")
+    assert not common.similar("Wire", "Wire In The Blood")
+    assert not common.similar("The Wire", "Wire In The Blood")
+    assert not common.similar('Big Train', 'Big Ideas for a Small Planet')
