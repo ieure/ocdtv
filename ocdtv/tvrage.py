@@ -93,7 +93,7 @@ def _metadata_internal(info, eps):
     return dict(((season, ep),
                  {'show': info['Show Name'],
                   'album': info['Show Name'],
-                  'genre': info['Genres'],
+                  'genre': info.get('Genres', "Unknown Genre"),
                   'disc_count': len(season_eps),
                   'disc_number': season,
                   'track_number': ep,
