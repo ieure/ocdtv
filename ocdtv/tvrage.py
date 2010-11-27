@@ -4,6 +4,8 @@
 # Author: Ian Eure <ian.eure@gmail.com>
 #
 
+"""TVRage API interface."""
+
 import os
 import re
 import logging

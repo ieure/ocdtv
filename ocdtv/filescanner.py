@@ -4,7 +4,7 @@
 # Author: Ian Eure <ian.eure@gmail.com>
 #
 
-"""A new Python file"""
+"""File scanning module."""
 
 import sys
 import os

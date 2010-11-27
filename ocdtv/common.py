@@ -4,7 +4,7 @@
 # Author: Ian Eure <ian.eure@gmail.com>
 #
 
-"""A new Python file"""
+"""Filename info extraction."""
 
 import re
 from itertools import ifilter

@@ -4,7 +4,7 @@
 # Author: Ian Eure <ian.eure@gmail.com>
 #
 
-"""A new Python file"""
+"""The CLI for OCDTV."""
 
 import sys
 import logging
