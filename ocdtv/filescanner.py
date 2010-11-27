@@ -32,9 +32,10 @@ def scan(directory="."):
     logging.debug("Walking %s", directory)
     for (path, names, filenames) in os.walk(directory):
         logging.debug("%r", filenames)
-        for video in filenames:
+        for video in ifilter(is_video, filenames):
             logging.debug("Found video %s", video)
             info = rage.file_metadata(video)
+
             if not info:
                 logging.debug("No episode information found in %s", video)
                 continue
