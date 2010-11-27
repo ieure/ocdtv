@@ -6,6 +6,7 @@
 
 """Talk to iTunes."""
 
+import os
 import logging
 from itertools import imap
 
@@ -24,4 +25,5 @@ def add(file_, metadata):
         logging.error("Failed to add file %s", file_)
         return
 
+    logging.debug("Added %s to iTunes" % os.path.basename(file_))
     set_metadata(track, metadata)
