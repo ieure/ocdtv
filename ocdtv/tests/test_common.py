@@ -32,6 +32,8 @@ SHOW_DATA = (
      'show': "The Fugitive", 'season': 03, 'episode': 24},
     {'filename': "true.blood.s03e02.720p.hdtv.x264-immerse.m4v",
      'show': "True Blood", 'season': 03, 'episode': 02},
+     {'filename': "criminal.minds.610.hdtv-lol.avi",
+      'show': "Criminal Minds", 'season': 06, 'episode': 01},
     {'filename': "doctor_who_2005.5x13.the_big_bang.720p_hdtv_x264-fov.mkv",
      'show': "Doctor Who 2005", 'season': 05, 'episode': 13}
     )
