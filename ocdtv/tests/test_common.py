@@ -33,9 +33,15 @@ SHOW_DATA = (
     {'filename': "true.blood.s03e02.720p.hdtv.x264-immerse.m4v",
      'show': "True Blood", 'season': 03, 'episode': 02},
      {'filename': "criminal.minds.610.hdtv-lol.avi",
-      'show': "Criminal Minds", 'season': 06, 'episode': 01},
+      'show': "Criminal Minds", 'season': 6, 'episode': 10},
     {'filename': "doctor_who_2005.5x13.the_big_bang.720p_hdtv_x264-fov.mkv",
-     'show': "Doctor Who 2005", 'season': 05, 'episode': 13}
+     'show': "Doctor Who 2005", 'season': 05, 'episode': 13},
+    {'filename': "Battlestar Galactica 1980 - 02x05 - The Super Scouts (part 2).avi",
+     'show': "Battlestar Galactica 1980", 'season': 2, 'episode': 5},
+    {'filename': "Galactica 1980.2x02 Galactica Descubre La Tierra (Parte 2).avi",
+     'show': "Galactica 1980", 'season': 2, 'episode': 2},
+    {'filename': "Battlestar.Galactica.S04E15.HDTV.XviD-0TV.avi",
+     'show': "Battlestar Galactica", 'season': 4, 'episode': 15}
     )
 
 def check_show_name(filename, showname):

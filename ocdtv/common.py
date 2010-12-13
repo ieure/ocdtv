@@ -10,17 +10,19 @@ import re
 from itertools import ifilter
 from difflib import get_close_matches
 
-JUNK_REGEXP = re.compile(r"[ \._\-]+")
+JUNK_REGEXP = re.compile(r"[ \._\-\[\]]+")
 
 RAW_REGEXPS = (
     # "s05e152" "s5.e152"
     r"(s(?P<season>[0-9]{1,2}))\.?(e(?P<episode>[0-9]{1,3}))",
     # "5x152"
-    r"([^0-9]+(?P<season>[0-9]{1,2}))(x(?P<episode>[0-9]{1,3}))",
+    r"(?P<season>[0-9]{1,2})(x(?P<episode>[0-9]{1,3}))",
     # "5.152" "5-152"
     r"([^0-9]+(?P<season>[0-9]{1,2}))[^0-9](?P<episode>[0-9]{1,3})",
-    # "5152" "504"
-    r"([^0-9]+(?P<season>[0-9]{1,2}))(?P<episode>[0-9]{1,3})",
+    # "504"
+    r"(?P<season>[0-9]{1})(?P<episode>[0-9]{1,2})",
+    # "5152"
+    r"(?P<season>[0-9]{2})(?P<episode>[0-9]{1,2})",
     )
 
 EPISODE_REGEXPS = tuple(re.compile(exp, re.I) for exp in RAW_REGEXPS)
