@@ -48,14 +48,15 @@
 
 * Limitations & known issues
 
-** Fails to recognize some filenames
+** May fails to recognize some filenames
 
    While OCDTV can cope with most sensibly-named files, there’s a lot
-   of crap out there, and there are some cases where it fails to
-   extract the correct information from files.
+   of crap out there, and are likely to be some cases where it fails
+   to extract the correct information from files.
 
    Feel free to contribute test cases which at least document the
-   shortcomings.
+   shortcomings. If you aren’t comfortable enough with Python, to do
+   this, just open [[https://github.com/ieure/ocdtv/issues][an issue on GitHub]].
 
 ** Does not handle dated shows
 
